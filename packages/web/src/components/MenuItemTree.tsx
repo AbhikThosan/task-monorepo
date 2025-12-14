@@ -1,21 +1,16 @@
 import { trpc } from '../lib/trpc';
 import { useState } from 'react';
-
-type MenuItem = {
-  id: string;
-  label: string;
-  url: string;
-  order: number;
-  children: MenuItem[];
-};
+import type { MenuItem } from '../types/menuItem';
 
 function MenuItemNode({ item, onEdit, onDelete }: { item: MenuItem; onEdit: (item: MenuItem) => void; onDelete: (id: string) => void }) {
   const [isExpanded, setIsExpanded] = useState(true);
 
+  const children = item.children || [];
+
   return (
     <div className="ml-4 border-l-2 border-gray-300 pl-4">
       <div className="flex items-center gap-2 py-1">
-        {item.children.length > 0 && (
+        {children.length > 0 && (
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="text-gray-500 hover:text-gray-700"
@@ -39,9 +34,9 @@ function MenuItemNode({ item, onEdit, onDelete }: { item: MenuItem; onEdit: (ite
           Delete
         </button>
       </div>
-      {isExpanded && item.children.length > 0 && (
+      {isExpanded && children.length > 0 && (
         <div>
-          {item.children.map((child) => (
+          {children.map((child) => (
             <MenuItemNode
               key={child.id}
               item={child}

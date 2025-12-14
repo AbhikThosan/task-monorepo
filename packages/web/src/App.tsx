@@ -2,15 +2,7 @@ import { useState } from 'react';
 import { trpc } from './lib/trpc';
 import { MenuItemTree } from './components/MenuItemTree';
 import { MenuItemForm } from './components/MenuItemForm';
-
-type MenuItem = {
-  id: string;
-  label: string;
-  url: string;
-  order: number;
-  parentId: string | null;
-  children?: MenuItem[];
-};
+import type { MenuItem } from './types/menuItem';
 
 function App() {
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);

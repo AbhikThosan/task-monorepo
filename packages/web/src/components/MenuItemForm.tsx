@@ -1,14 +1,6 @@
 import { useState, useEffect } from 'react';
 import { trpc } from '../lib/trpc';
-
-type MenuItem = {
-  id: string;
-  label: string;
-  url: string;
-  order: number;
-  parentId: string | null;
-  children?: MenuItem[];
-};
+import type { MenuItem } from '../types/menuItem';
 
 type MenuItemFormProps = {
   item?: MenuItem | null;
